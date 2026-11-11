@@ -1,0 +1,7 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {"label": "Запустить AURA", "type": "npm", "script": "dev", "isBackground": true, "problemMatcher": []},
+    {"label": "Собрать AURA", "type": "npm", "script": "build", "group": "build", "problemMatcher": []}
+  ]
+}
