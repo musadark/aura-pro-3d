@@ -13,6 +13,7 @@ export default function Experience() {
   const controller = useRef<SceneController | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLButtonElement | null>(null);
+  const motionButton = useRef<HTMLButtonElement>(null);
   const [chapter, setChapter] = useState(0);
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -111,10 +112,14 @@ export default function Experience() {
         <header className="header">
           {chapterLink(0, <><span className="brand-icon" aria-hidden="true">◒</span> AURA<span className="brand-period">®</span></>, "brand")}
           <nav aria-label="Основная навигация">{chapterLink(1, "Погружение")}{chapterLink(2, "Дизайн")}{chapterLink(3, "AURA PRO", "nav-product")}</nav>
-          <button className="motion-button" onClick={toggleMotion} aria-pressed={!motionEnabled} aria-label={motionEnabled ? "Остановить анимацию" : "Включить плавную анимацию"}>
-            <span className={`equalizer ${!motionEnabled ? "paused" : ""}`} aria-hidden="true"><i /><i /><i /><i /></span><span>{motionEnabled ? "Движение" : "Статика"}</span>
+          <button ref={motionButton} className="motion-button" onClick={toggleMotion} disabled={failed} aria-pressed={motionEnabled} aria-label={motionEnabled ? "Анимация включена. Остановить анимацию" : "Включить анимацию"}>
+            <span className={`equalizer ${!motionEnabled ? "paused" : ""}`} aria-hidden="true"><i /><i /><i /><i /></span><span>{motionEnabled ? "Анимация: вкл." : "Включить анимацию"}</span>
           </button>
         </header>
+        {!motionEnabled && ready && !failed && <aside className="motion-prompt" aria-label="Режим просмотра">
+          <p>Сейчас — без движения.<br /><span>Включи анимацию и прокручивай: наушники оживут.</span></p>
+          <button onClick={() => { toggleMotion(); motionButton.current?.focus({ preventScroll: true }); }}>Включить 3D-анимацию <span aria-hidden="true">▶</span></button>
+        </aside>}
         <nav className="chapter-nav" aria-label="Сцены">
           {chapters.map((item, index) => <a href={`#${item.id}`} key={item.id} aria-label={`${index + 1}. ${item.name}`} aria-current={chapter === index ? "step" : undefined} onClick={e => { e.preventDefault(); navigate(index); }}><span className="chapter-line" /><span className="chapter-number">0{index + 1}</span><span className="chapter-name">{item.name}</span></a>)}
         </nav>

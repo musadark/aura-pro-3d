@@ -246,6 +246,37 @@ h1,h2,p {
   letter-spacing:.05em
 }
 
+.motion-button:disabled { opacity:.4; cursor:default }
+.motion-prompt {
+  position:absolute;
+  z-index:6;
+  top:90px;
+  right:4vw;
+  max-width:360px;
+  padding:16px 20px;
+  border:1px solid #cdf8c944;
+  border-radius:16px;
+  background:#111d20;
+  color:#ecf2f0;
+  box-shadow:0 12px 32px #0003;
+}
+.motion-prompt p { margin:0 0 12px; font-size:12px; line-height:1.6 }
+.motion-prompt p span { color:#b8c7c8 }
+.motion-prompt button {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  width:100%;
+  min-height:44px;
+  padding:12px 16px;
+  border-radius:24px;
+  background:#cdf8c9;
+  color:#12231b;
+  font-size:12px;
+  font-weight:700;
+}
+
 .equalizer {
   height:14px;
   display:flex;
@@ -844,8 +875,7 @@ h2 {
     font-size:23px
   }
   .header nav {
-    margin-left:auto;
-    margin-right:23px
+    display:none
   }
   .header nav a:not(.nav-product) {
     display:none
@@ -854,11 +884,17 @@ h2 {
     font-size:9px
   }
   .motion-button {
-    padding:10px 0
+    padding:10px 0;
+    min-height:44px;
+    gap:7px;
+    font-size:10px;
+    letter-spacing:0
   }
   .motion-button>span:last-child {
-    display:none
+    display:inline
   }
+  .motion-prompt { top:82px; right:6%; left:6%; max-width:none; padding:12px 16px }
+  .experience[data-motion="off"]:not(.fallback) .model-label { display:none }
   .large-type {
     top:18%;
     left:50%;
